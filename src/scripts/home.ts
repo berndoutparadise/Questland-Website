@@ -49,7 +49,12 @@ const backButton = root.querySelector<HTMLButtonElement>("[data-finder-back]");
 const nextButton = root.querySelector<HTMLButtonElement>("[data-finder-next]");
 const profile = root.querySelector<HTMLElement>("[data-selection-profile]");
 const profileChips = root.querySelector<HTMLElement>("[data-selection-chips]");
-const questList = root.querySelector<HTMLElement>("[data-quest-list]");
+const questList = root.querySelector<HTMLElement>("[data-questlog-content]");
+const neutralGroup = root.querySelector<HTMLElement>("[data-questlog-neutral]");
+const personalizedGroup = root.querySelector<HTMLElement>("[data-questlog-personalized]");
+const neutralList = root.querySelector<HTMLElement>("[data-quest-list]");
+const recommendedList = root.querySelector<HTMLElement>("[data-quest-list-recommended]");
+const additionalList = root.querySelector<HTMLElement>("[data-quest-list-additional]");
 const recommendationIntro = root.querySelector<HTMLElement>("[data-recommendation-intro]");
 
 const labels: Record<string, string> = {};
@@ -76,19 +81,21 @@ function questionAnswered(step: number) {
 
 function resetRecommendations() {
   state.recommendationApplied = false;
-  recommendationIntro?.setAttribute("hidden", "");
+  personalizedGroup?.setAttribute("hidden", "");
+  neutralGroup?.removeAttribute("hidden");
   playTypeIds.forEach((id) => {
     const entry = questList?.querySelector<HTMLElement>(`[data-play-type="${id}"]`);
     if (!entry) return;
     entry.dataset.role = "standard";
     entry.querySelector<HTMLElement>("[data-rank]")?.setAttribute("hidden", "");
   });
-  if (questList) {
+  if (neutralList && questList) {
     playTypeIds.forEach((id) => {
       const entry = questList.querySelector<HTMLElement>(`[data-play-type="${id}"]`);
-      if (entry) questList.append(entry);
+      if (entry) neutralList.append(entry);
     });
   }
+  setQuestOpen(null);
 }
 
 function renderProfile() {
@@ -210,8 +217,10 @@ function setQuestOpen(id: PlayTypeId | null) {
 
 function applyRecommendations({ scroll = true }: { scroll?: boolean } = {}) {
   const result = recommend(state);
-  if (!result || !questList) return;
+  if (!result || !questList || !recommendedList || !additionalList) return;
   state.recommendationApplied = true;
+  neutralGroup?.setAttribute("hidden", "");
+  personalizedGroup?.removeAttribute("hidden");
   recommendationIntro?.removeAttribute("hidden");
 
   const ordered = [result.primary, ...result.alternatives, ...playTypeIds.filter((id) => id !== result.primary && !result.alternatives.includes(id))];
@@ -226,7 +235,8 @@ function applyRecommendations({ scroll = true }: { scroll?: boolean } = {}) {
     } else {
       rank?.setAttribute("hidden", "");
     }
-    questList.append(entry);
+    if (index < 3) recommendedList.append(entry);
+    else additionalList.append(entry);
   });
 
   setQuestOpen(result.primary);

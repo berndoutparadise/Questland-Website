@@ -175,64 +175,79 @@ const requestLabel = t.nav.start;
             <p>{t.questlog.intro}</p>
           </header>
 
-          <div class="recommendation-intro" data-recommendation-intro hidden>
-            <p class="kicker">{t.questlog.selectedHeading}</p>
-            <p>{t.questlog.selectedText}</p>
-          </div>
-
-          <div class="quest-list" data-quest-list>
-            {playOrder.map((id) => {
-              const item = playTypes[locale][id];
-              const image = imageMap[id];
-              return (
-                <article class="quest-entry reveal" data-play-type={id} data-role="standard">
-                  <button
-                    class="quest-entry__summary"
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls={`quest-details-${id}`}
-                    data-quest-toggle
-                  >
-                    <span class="quest-entry__image">
-                      <Picture
-                        src={image}
-                        formats={["avif", "webp"]}
-                        widths={[520, 760, 1080]}
-                        sizes="(max-width: 800px) 100vw, 42vw"
-                        alt={item.imageAlt}
-                        loading="lazy"
-                      />
-                      <span class="quest-rank" data-rank hidden></span>
-                    </span>
-                    <span class="quest-entry__copy">
-                      <span class="quest-meta">{item.meta}</span>
-                      <strong>{item.title}</strong>
-                      <span class="quest-teaser">{item.teaser}</span>
-                      <span class="quest-open">{t.questlog.details}<i aria-hidden="true">+</i></span>
-                    </span>
-                  </button>
-                  <div class="quest-entry__details" id={`quest-details-${id}`} data-quest-details hidden>
-                    <div class="quest-detail-grid">
-                      <div>
-                        <p>{item.description}</p>
-                        <h3>{t.questlog.fitLabel}</h3>
-                        <p>{item.fit}</p>
-                      </div>
-                      <div>
-                        <h3>{locale === "de" ? "Typische Spielerlebnisse" : "Typical experiences"}</h3>
-                        <ul class="experience-list">{item.experiences.map((experience) => <li>{experience}</li>)}</ul>
-                        <h3>{item.variantsLabel}</h3>
-                        <div class="variant-list">
-                          {item.variants.map((variant) => (
-                            <div><strong>{variant.title}</strong><span>{variant.description}</span></div>
-                          ))}
+          <div class="questlog-content" data-questlog-content>
+            <div class="questlog-neutral" data-questlog-neutral>
+              <div class="quest-list" data-quest-list>
+                {playOrder.map((id) => {
+                  const item = playTypes[locale][id];
+                  const image = imageMap[id];
+                  return (
+                    <article class="quest-entry reveal" data-play-type={id} data-role="standard">
+                      <button
+                        class="quest-entry__summary"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls={`quest-details-${id}`}
+                        data-quest-toggle
+                      >
+                        <span class="quest-entry__image">
+                          <Picture
+                            src={image}
+                            formats={["avif", "webp"]}
+                            widths={[520, 760, 1080]}
+                            sizes="(max-width: 800px) 100vw, 42vw"
+                            alt={item.imageAlt}
+                            loading="lazy"
+                          />
+                          <span class="quest-rank" data-rank hidden></span>
+                        </span>
+                        <span class="quest-entry__copy">
+                          <span class="quest-meta">{item.meta}</span>
+                          <strong>{item.title}</strong>
+                          <span class="quest-teaser">{item.teaser}</span>
+                          <span class="quest-open">{t.questlog.details}<i aria-hidden="true">+</i></span>
+                        </span>
+                      </button>
+                      <div class="quest-entry__details" id={`quest-details-${id}`} data-quest-details hidden>
+                        <div class="quest-detail-grid">
+                          <div>
+                            <p>{item.description}</p>
+                            <h3>{t.questlog.fitLabel}</h3>
+                            <p>{item.fit}</p>
+                          </div>
+                          <div>
+                            <h3>{locale === "de" ? "Typische Spielerlebnisse" : "Typical experiences"}</h3>
+                            <ul class="experience-list">{item.experiences.map((experience) => <li>{experience}</li>)}</ul>
+                            <h3>{item.variantsLabel}</h3>
+                            <div class="variant-list">
+                              {item.variants.map((variant) => (
+                                <div><strong>{variant.title}</strong><span>{variant.description}</span></div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div class="questlog-personalized" data-questlog-personalized hidden>
+              <div class="recommendation-intro" data-recommendation-intro>
+                <p class="kicker">{t.questlog.selectedHeading}</p>
+                <p>{t.questlog.selectedText}</p>
+              </div>
+
+              <div class="quest-selection" aria-label={t.questlog.selectedHeading}>
+                <div class="quest-list quest-list--recommended" data-quest-list-recommended></div>
+              </div>
+
+              <div class="questlog-discovery">
+                <div class="questlog-divider" aria-hidden="true"><span></span><p class="kicker">{t.questlog.moreHeading}</p><span></span></div>
+                <div class="quest-list quest-list--additional" data-quest-list-additional></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

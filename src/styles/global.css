@@ -1999,6 +1999,215 @@ h3 {
   .simple-panel { padding: 36px 24px; border-radius: 28px 28px 28px 7px; }
 }
 
+/* Questlog hierarchy: personal selection first, open discovery second. */
+.questlog-content {
+  position: relative;
+}
+
+.questlog-personalized[hidden],
+.questlog-neutral[hidden] {
+  display: none;
+}
+
+.quest-selection {
+  padding: clamp(18px, 3vw, 34px);
+  background:
+    linear-gradient(135deg, rgba(185, 221, 84, .2), rgba(242, 184, 75, .12)),
+    rgba(255, 255, 255, .72);
+  border: 1px solid rgba(117, 151, 45, .42);
+  border-radius: 34px 34px 34px 10px;
+  box-shadow: 0 24px 60px rgba(49, 71, 45, .1);
+}
+
+.quest-list--recommended {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.quest-list--recommended .quest-entry[data-role="primary"] {
+  grid-column: 1 / -1;
+}
+
+.quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__summary {
+  grid-template-columns: minmax(150px, .55fr) minmax(0, 1fr);
+  min-height: 238px;
+}
+
+.quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__copy {
+  padding: 25px 28px;
+}
+
+.quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__copy > strong {
+  font-size: clamp(2.35rem, 4vw, 4.3rem);
+}
+
+.quest-list--recommended .quest-entry[data-role="alternative"] .quest-teaser {
+  margin-top: 11px;
+  font-size: .86rem;
+}
+
+.questlog-discovery {
+  margin-top: clamp(58px, 8vw, 104px);
+  padding-top: 28px;
+  border-top: 1px solid rgba(47, 115, 87, .12);
+}
+
+.questlog-divider {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin: 0 0 24px;
+  color: var(--forest-800);
+}
+
+.questlog-divider span {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, rgba(47, 115, 87, .46) 0 8px, transparent 8px 14px);
+}
+
+.questlog-divider span:first-child::after,
+.questlog-divider span:last-child::before {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 7px;
+  margin-top: -3px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.questlog-divider span:first-child::after { margin-left: auto; }
+
+.questlog-divider p {
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--forest-800);
+}
+
+.quest-list--additional {
+  gap: 12px;
+}
+
+.quest-list--additional .quest-entry {
+  border-radius: 18px 18px 18px 6px;
+  background: rgba(255, 255, 255, .68);
+  border-color: rgba(47, 115, 87, .16);
+  box-shadow: none;
+}
+
+.quest-list--additional .quest-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.quest-list--additional .quest-entry__summary {
+  grid-template-columns: minmax(170px, .28fr) minmax(0, 1fr);
+  min-height: 154px;
+}
+
+.quest-list--additional .quest-entry__image::after {
+  background: linear-gradient(90deg, transparent 55%, rgba(8, 37, 28, .2));
+}
+
+.quest-list--additional .quest-entry__copy {
+  padding: 22px 30px;
+}
+
+.quest-list--additional .quest-entry__copy > strong {
+  font-size: clamp(2.1rem, 4vw, 3.7rem);
+}
+
+.quest-list--additional .quest-teaser {
+  margin-top: 9px;
+  font-size: .86rem;
+}
+
+.quest-list--additional .quest-open {
+  margin-top: 14px;
+}
+
+@media (max-width: 800px) {
+  .quest-list--recommended {
+    grid-template-columns: 1fr;
+  }
+
+  .quest-list--recommended .quest-entry[data-role="primary"] {
+    grid-column: auto;
+  }
+
+  .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__summary {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__image {
+    height: 220px;
+  }
+
+  .quest-list--additional .quest-entry__summary {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .quest-selection {
+    padding: 12px;
+    border-radius: 25px 25px 25px 8px;
+  }
+
+  .questlog-discovery {
+    margin-top: 58px;
+    padding-top: 22px;
+  }
+
+  .questlog-divider {
+    gap: 10px;
+  }
+
+  .questlog-divider p {
+    font-size: .58rem;
+    letter-spacing: .12em;
+    white-space: nowrap;
+  }
+
+  .quest-list--additional .quest-entry__summary {
+    grid-template-columns: 96px minmax(0, 1fr);
+    min-height: 118px;
+  }
+
+  .quest-list--additional .quest-entry__image {
+    height: 118px;
+  }
+
+  .quest-list--additional .quest-entry__copy {
+    padding: 17px 16px;
+  }
+
+  .quest-list--additional .quest-entry__copy > strong {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .quest-list--additional .quest-meta {
+    margin-bottom: 7px;
+    font-size: .54rem;
+  }
+
+  .quest-list--additional .quest-teaser {
+    display: none;
+  }
+
+  .quest-list--additional .quest-open {
+    margin-top: 8px;
+    font-size: .56rem;
+  }
+
+  .quest-list--additional .quest-open i {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *,
