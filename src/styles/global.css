@@ -2020,36 +2020,38 @@ h3 {
 }
 
 .quest-list--recommended {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 15px;
+  grid-template-columns: 1fr;
+  gap: 14px;
 }
 
 .quest-list--recommended .quest-entry[data-role="primary"] {
-  grid-column: 1 / -1;
+  grid-column: auto;
 }
 
 .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__summary {
-  grid-template-columns: minmax(150px, .55fr) minmax(0, 1fr);
-  min-height: 238px;
+  grid-template-columns: minmax(220px, .36fr) minmax(0, 1fr);
+  min-height: 215px;
 }
 
 .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__copy {
-  padding: 25px 28px;
+  padding: 22px 30px;
 }
 
 .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__copy > strong {
-  font-size: clamp(2.35rem, 4vw, 4.3rem);
+  font-size: clamp(2.25rem, 4vw, 4rem);
 }
 
 .quest-list--recommended .quest-entry[data-role="alternative"] .quest-teaser {
-  margin-top: 11px;
-  font-size: .86rem;
+  margin-top: 9px;
+  font-size: .84rem;
 }
 
 .questlog-discovery {
-  margin-top: clamp(58px, 8vw, 104px);
-  padding-top: 28px;
-  border-top: 1px solid rgba(47, 115, 87, .12);
+  margin-top: clamp(54px, 7vw, 88px);
+  padding: 28px 24px 30px;
+  background: rgba(223, 233, 215, .28);
+  border: 1px solid rgba(47, 115, 87, .14);
+  border-radius: 28px 28px 28px 8px;
 }
 
 .questlog-divider {
@@ -2142,7 +2144,11 @@ h3 {
   }
 
   .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__image {
-    height: 220px;
+    height: 185px;
+  }
+
+  .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__copy {
+    padding: 22px 24px;
   }
 
   .quest-list--additional .quest-entry__summary {
@@ -2158,7 +2164,7 @@ h3 {
 
   .questlog-discovery {
     margin-top: 58px;
-    padding-top: 22px;
+    padding: 22px 12px 18px;
   }
 
   .questlog-divider {
@@ -2182,6 +2188,14 @@ h3 {
 
   .quest-list--additional .quest-entry__copy {
     padding: 17px 16px;
+  }
+
+  .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__image {
+    height: 155px;
+  }
+
+  .quest-list--recommended .quest-entry[data-role="alternative"] .quest-entry__copy {
+    padding: 20px 17px;
   }
 
   .quest-list--additional .quest-entry__copy > strong {
