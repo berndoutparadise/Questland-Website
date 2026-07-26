@@ -88,24 +88,6 @@ const requestLabel = t.nav.start;
             </div>
           </div>
 
-          <aside class="mission-hud reveal" aria-label={locale === "de" ? "Aktuelle Mission" : "Current mission"}>
-            <div class="mission-hud__top">
-              <span>QUEST 01 / REAL WORLD</span>
-              <span class="status-dot">{t.hero.status}</span>
-            </div>
-            <div class="mission-hud__objective">
-              <span class="target-marker" aria-hidden="true"><i></i></span>
-              <div>
-                <small>{locale === "de" ? "OBJECTIVE" : "OBJECTIVE"}</small>
-                <strong>{t.hero.objective}</strong>
-              </div>
-            </div>
-            <div class="mission-hud__meta">
-              <div><small>TERRAIN</small><strong>{t.hero.terrain}</strong></div>
-              <div><small>MODE</small><strong>CO-OP</strong></div>
-            </div>
-            <div class="hud-tags">{t.hero.tags.map((tag) => <span>{tag}</span>)}</div>
-          </aside>
         </div>
         <a class="scroll-cue" href="#questgiver"><span></span>{t.hero.find}</a>
       </section>

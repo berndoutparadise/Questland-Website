@@ -253,7 +253,7 @@ h3 {
   padding: 9px 0;
 }
 
-.primary-nav a:not(.nav-adventure)::after {
+.primary-nav a:not(.nav-adventure):not(.nav-quest)::after {
   content: "";
   position: absolute;
   right: 0;
@@ -273,7 +273,24 @@ h3 {
 }
 
 .primary-nav .nav-quest {
-  color: #986019;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 11px 17px;
+  color: var(--forest-950);
+  background: var(--gold);
+  border: 1px solid rgba(151, 96, 25, .16);
+  border-radius: 999px;
+  box-shadow: 0 7px 18px rgba(220, 143, 35, .2);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.primary-nav .nav-quest:hover,
+.primary-nav .nav-quest:focus-visible {
+  background: var(--gold-light);
+  box-shadow: 0 10px 22px rgba(220, 143, 35, .26);
+  transform: translateY(-2px);
 }
 
 .nav-adventure {
@@ -403,9 +420,8 @@ h3 {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(330px, .45fr);
+  grid-template-columns: minmax(0, 770px);
   align-items: center;
-  gap: clamp(30px, 5vw, 72px);
   min-height: 700px;
 }
 
@@ -513,131 +529,6 @@ h3 {
 
 .button--adventure:hover { background: var(--lime-bright); }
 .button--large { min-height: 56px; padding-inline: 27px; }
-
-.mission-hud {
-  position: relative;
-  align-self: end;
-  margin-bottom: 58px;
-  padding: 18px;
-  color: var(--white);
-  background: rgba(8, 37, 28, .86);
-  border: 1px solid rgba(255, 255, 255, .24);
-  border-radius: 24px 24px 8px 24px;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(13px);
-}
-
-.mission-hud::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  right: 18px;
-  width: 48px;
-  height: 3px;
-  background: var(--lime);
-  border-radius: 99px;
-  box-shadow: 0 0 22px rgba(185, 221, 84, .8);
-}
-
-.mission-hud__top,
-.mission-hud__meta,
-.hud-tags {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.mission-hud__top {
-  padding: 0 4px 13px;
-  color: rgba(255, 255, 255, .68);
-  font-size: .59rem;
-  font-weight: 750;
-  letter-spacing: .13em;
-}
-
-.status-dot {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--lime-bright);
-}
-
-.status-dot::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  background: var(--lime);
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px rgba(185, 221, 84, .12);
-}
-
-.mission-hud__objective {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 18px 17px;
-  background: rgba(255, 255, 255, .09);
-  border: 1px solid rgba(255, 255, 255, .1);
-  border-radius: 16px;
-}
-
-.target-marker {
-  display: grid;
-  place-items: center;
-  width: 47px;
-  height: 47px;
-  border: 2px solid var(--gold);
-  border-radius: 50% 50% 50% 9px;
-  transform: rotate(-45deg);
-  box-shadow: 0 0 22px rgba(242, 184, 75, .22);
-}
-
-.target-marker i {
-  width: 10px;
-  height: 10px;
-  background: var(--lime);
-  border-radius: 50%;
-  transform: rotate(45deg);
-}
-
-.mission-hud small {
-  display: block;
-  margin-bottom: 2px;
-  color: rgba(255, 255, 255, .5);
-  font-size: .54rem;
-  font-weight: 750;
-  letter-spacing: .14em;
-}
-
-.mission-hud strong {
-  display: block;
-  font-size: .76rem;
-}
-
-.mission-hud__meta {
-  padding: 15px 4px;
-}
-
-.mission-hud__meta > div { flex: 1; }
-.mission-hud__meta > div + div { padding-left: 18px; border-left: 1px solid rgba(255, 255, 255, .13); }
-
-.hud-tags {
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  padding-top: 13px;
-  border-top: 1px solid rgba(255, 255, 255, .12);
-}
-
-.hud-tags span {
-  padding: 5px 8px;
-  color: rgba(255, 255, 255, .72);
-  background: rgba(255, 255, 255, .07);
-  border-radius: 999px;
-  font-size: .54rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
 
 .scroll-cue {
   position: absolute;
@@ -1889,9 +1780,8 @@ h3 {
   .primary-nav { gap: 12px; font-size: .8rem; }
   .header-tools { margin-left: 14px; }
   .hero { min-height: 850px; }
-  .hero-content { grid-template-columns: minmax(0, 1fr) 310px; }
+  .hero-content { grid-template-columns: minmax(0, 770px); }
   .hero-copy { padding: 42px; }
-  .mission-hud { margin-bottom: 30px; }
   .answer-grid--four { grid-template-columns: repeat(2, 1fr); }
   .route-map { grid-template-columns: repeat(5, minmax(150px, 1fr)); overflow-x: auto; padding-bottom: 20px; }
   .route-map::before { right: 40px; left: 40px; }
@@ -1956,14 +1846,6 @@ h3 {
     margin-top: 390px;
     padding: 38px;
   }
-  .mission-hud {
-    position: absolute;
-    z-index: 3;
-    top: 275px;
-    right: 18px;
-    width: 285px;
-    margin: 0;
-  }
   .scroll-cue { display: none; }
 
   .questgiver-stage { grid-template-columns: 1fr; }
@@ -2022,15 +1904,6 @@ h3 {
   .hero-support { font-size: .86rem; }
   .hero-actions { display: grid; }
   .button { width: 100%; }
-  .mission-hud {
-    top: 305px;
-    right: 10px;
-    width: 255px;
-    padding: 12px;
-  }
-  .mission-hud__objective { padding: 12px; }
-  .mission-hud__meta, .hud-tags { display: none; }
-
   .section-heading { margin-bottom: 40px; }
   .questgiver::before { display: none; }
   .questgiver-character { min-height: 480px; border-radius: 28px 8px 28px 28px; }
