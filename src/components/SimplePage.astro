@@ -1,0 +1,68 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import { getContent } from "../data/content";
+import type { Locale } from "../data/quest";
+
+type Props = {
+  locale: Locale;
+  kind: "thanks" | "legal" | "privacy";
+};
+
+const { locale, kind } = Astro.props;
+const t = getContent(locale);
+const homeHref = `/${locale}/`;
+const requestHref = locale === "de" ? "/de/anfrage/" : "/en/request/";
+const isThanks = kind === "thanks";
+const titleMap = {
+  de: { legal: "Impressum", privacy: "Datenschutz" },
+  en: { legal: "Legal notice", privacy: "Privacy" }
+};
+const pageTitle = isThanks ? t.thanks.title : titleMap[locale][kind as "legal" | "privacy"];
+const canonicalPath = isThanks
+  ? locale === "de" ? "/de/danke/" : "/en/thanks/"
+  : kind === "legal"
+    ? locale === "de" ? "/de/impressum/" : "/en/legal-notice/"
+    : locale === "de" ? "/de/datenschutz/" : "/en/privacy/";
+const alternateDe = isThanks ? "/de/danke/" : kind === "legal" ? "/de/impressum/" : "/de/datenschutz/";
+const alternateEn = isThanks ? "/en/thanks/" : kind === "legal" ? "/en/legal-notice/" : "/en/privacy/";
+---
+
+<SiteLayout
+  {locale}
+  title={`${pageTitle} · Questland`}
+  description={isThanks ? t.thanks.text : t.legalPlaceholder}
+  {canonicalPath}
+  {alternateDe}
+  {alternateEn}
+  noindex
+>
+  <div class="site-shell site-shell--subpage">
+    <Header
+      {locale}
+      deHref={alternateDe}
+      enHref={alternateEn}
+      {homeHref}
+      {requestHref}
+      simple
+    />
+    <main id="main" class="simple-page">
+      <div class="page">
+        <section class:list={["simple-panel", isThanks && "simple-panel--thanks"]}>
+          <p class="kicker">{isThanks ? t.thanks.kicker : "QUESTLAND"}</p>
+          <h1>{pageTitle}</h1>
+          <p>{isThanks ? t.thanks.text : t.legalPlaceholder}</p>
+          {!isThanks && (
+            <div class="legal-warning" role="note">
+              <strong>{locale === "de" ? "Noch nicht veröffentlichungsbereit" : "Not ready for publication"}</strong>
+              <span>{t.legalPlaceholder}</span>
+            </div>
+          )}
+          <a class="button button--adventure" href={homeHref}>{isThanks ? t.thanks.back : locale === "de" ? "Zur Startseite" : "Back to homepage"}</a>
+        </section>
+      </div>
+    </main>
+    <Footer {locale} {homeHref} />
+  </div>
+</SiteLayout>

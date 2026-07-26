@@ -1,0 +1,319 @@
+---
+import { Picture } from "astro:assets";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import { getContent, playTypes } from "../data/content";
+import type { Locale, PlayTypeId } from "../data/quest";
+
+import heroDesktop from "../assets/images/v2/hero-desktop.png";
+import heroMobile from "../assets/images/hero-mobile.png";
+import questgiver from "../assets/images/questgiver.png";
+import monsterImage from "../assets/images/v2/monster-hunt.png";
+import teamImage from "../assets/images/v2/team-battles.png";
+import adventureImage from "../assets/images/v2/adventure.png";
+import undercoverImage from "../assets/images/v2/undercover.png";
+import missionImage from "../assets/images/v2/special-mission.png";
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const t = getContent(locale);
+const homeHref = `/${locale}/`;
+const requestHref = locale === "de" ? "/de/anfrage/" : "/en/request/";
+const imageMap = {
+  monsterHunt: monsterImage,
+  teamBattles: teamImage,
+  adventure: adventureImage,
+  deduction: undercoverImage,
+  missions: missionImage
+};
+const playOrder = Object.keys(imageMap) as PlayTypeId[];
+const title = locale === "de" ? "Questland · Videospiele im echten Leben" : "Questland · Video games in real life";
+const description = t.hero.support;
+const requestLabel = t.nav.start;
+---
+
+<SiteLayout
+  {locale}
+  {title}
+  {description}
+  canonicalPath={homeHref}
+  alternateDe="/de/"
+  alternateEn="/en/"
+>
+  <div class="site-shell" data-home data-locale={locale}>
+    <Header
+      {locale}
+      deHref="/de/"
+      enHref="/en/"
+      {homeHref}
+      {requestHref}
+    />
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-art__desktop">
+            <Picture
+              src={heroDesktop}
+              formats={["avif", "webp"]}
+              widths={[960, 1440, 1920]}
+              sizes="64vw"
+              alt=""
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+          <div class="hero-art__mobile">
+            <Picture
+              src={heroMobile}
+              formats={["avif", "webp"]}
+              widths={[480, 780, 960]}
+              sizes="100vw"
+              alt=""
+              loading="eager"
+            />
+          </div>
+        </div>
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-content page">
+          <div class="hero-copy reveal">
+            <p class="eyebrow"><span></span>{t.hero.eyebrow}</p>
+            <h1 id="hero-title">{t.hero.title}<em>{t.hero.accent}</em></h1>
+            <p class="hero-gameplay">{t.hero.gameplay}</p>
+            <p class="hero-support">{t.hero.support}</p>
+            <div class="hero-actions">
+              <a class="button button--quest" href="#questgiver">{t.hero.find}</a>
+              <a class="button button--adventure" href={requestHref}>{t.hero.start}</a>
+            </div>
+          </div>
+
+          <aside class="mission-hud reveal" aria-label={locale === "de" ? "Aktuelle Mission" : "Current mission"}>
+            <div class="mission-hud__top">
+              <span>QUEST 01 / REAL WORLD</span>
+              <span class="status-dot">{t.hero.status}</span>
+            </div>
+            <div class="mission-hud__objective">
+              <span class="target-marker" aria-hidden="true"><i></i></span>
+              <div>
+                <small>{locale === "de" ? "OBJECTIVE" : "OBJECTIVE"}</small>
+                <strong>{t.hero.objective}</strong>
+              </div>
+            </div>
+            <div class="mission-hud__meta">
+              <div><small>TERRAIN</small><strong>{t.hero.terrain}</strong></div>
+              <div><small>MODE</small><strong>CO-OP</strong></div>
+            </div>
+            <div class="hud-tags">{t.hero.tags.map((tag) => <span>{tag}</span>)}</div>
+          </aside>
+        </div>
+        <a class="scroll-cue" href="#questgiver"><span></span>{t.hero.find}</a>
+      </section>
+
+      <section class="questgiver section" id="questgiver" aria-labelledby="finder-title">
+        <div class="page">
+          <header class="section-heading reveal">
+            <p class="kicker">{t.finder.kicker}</p>
+            <h2 id="finder-title">{t.finder.title}</h2>
+          </header>
+
+          <div class="questgiver-stage reveal" data-finder>
+            <div class="questgiver-character">
+              <Picture
+                src={questgiver}
+                formats={["avif", "webp"]}
+                widths={[420, 620, 820]}
+                sizes="(max-width: 760px) 100vw, 38vw"
+                alt={locale === "de" ? "Der stilisierte Questgeber mit Glatze, Bart, Karte und Kompass." : "The stylised bald, bearded quest giver holding a map and compass."}
+                loading="lazy"
+              />
+              <div class="character-badge"><span></span>{locale === "de" ? "QUESTGEBER · ONLINE" : "QUEST GIVER · ONLINE"}</div>
+            </div>
+
+            <div class="dialog-window" aria-live="polite">
+              <div class="dialog-chrome" aria-hidden="true">
+                <span>QUEST DIALOG</span><span>•••</span>
+              </div>
+              <div class="dialog-body">
+                <p class="npc-line" data-npc-message>{t.finder.greeting}</p>
+
+                <div class="finder-intro" data-finder-intro>
+                  <button class="button button--quest" type="button" data-finder-start>{t.finder.start}</button>
+                </div>
+
+                <div class="finder-questions" data-finder-questions hidden>
+                  {t.finder.questions.map((question, index) => (
+                    <fieldset class="finder-step" data-step={index} data-group={question.id} hidden>
+                      <legend class="sr-only">{question.text}</legend>
+                      {"hint" in question && question.hint && <p class="question-hint">{question.hint}</p>}
+                      <div class:list={["answer-grid", question.id === "ages" && "answer-grid--four"]}>
+                        {question.options.map(([value, label]) => (
+                          <button
+                            class="answer-chip"
+                            type="button"
+                            data-answer={value}
+                            aria-pressed="false"
+                          >
+                            <span class="answer-icon" aria-hidden="true"></span>
+                            <strong>{label}</strong>
+                          </button>
+                        ))}
+                      </div>
+                    </fieldset>
+                  ))}
+
+                  <div class="selection-profile" data-selection-profile hidden>
+                    <span>{t.finder.profile}</span>
+                    <div data-selection-chips></div>
+                  </div>
+
+                  <div class="dialog-navigation">
+                    <button class="text-button" type="button" data-finder-back>{t.finder.back}</button>
+                    <button class="button button--adventure" type="button" data-finder-next>{t.finder.next}</button>
+                  </div>
+                </div>
+
+                <div class="finder-complete" data-finder-complete hidden>
+                  <button class="button button--quest" type="button" data-show-quests>{t.finder.show}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="questlog section" id="game-types" aria-labelledby="questlog-title">
+        <div class="questlog-route" aria-hidden="true"></div>
+        <div class="page">
+          <header class="section-heading section-heading--split reveal">
+            <div>
+              <p class="kicker">{t.questlog.kicker}</p>
+              <h2 id="questlog-title">{t.questlog.title}</h2>
+            </div>
+            <p>{t.questlog.intro}</p>
+          </header>
+
+          <div class="recommendation-intro" data-recommendation-intro hidden>
+            <p class="kicker">{t.questlog.selectedHeading}</p>
+            <p>{t.questlog.selectedText}</p>
+          </div>
+
+          <div class="quest-list" data-quest-list>
+            {playOrder.map((id) => {
+              const item = playTypes[locale][id];
+              const image = imageMap[id];
+              return (
+                <article class="quest-entry reveal" data-play-type={id} data-role="standard">
+                  <button
+                    class="quest-entry__summary"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls={`quest-details-${id}`}
+                    data-quest-toggle
+                  >
+                    <span class="quest-entry__image">
+                      <Picture
+                        src={image}
+                        formats={["avif", "webp"]}
+                        widths={[520, 760, 1080]}
+                        sizes="(max-width: 800px) 100vw, 42vw"
+                        alt={item.imageAlt}
+                        loading="lazy"
+                      />
+                      <span class="quest-rank" data-rank hidden></span>
+                    </span>
+                    <span class="quest-entry__copy">
+                      <span class="quest-meta">{item.meta}</span>
+                      <strong>{item.title}</strong>
+                      <span class="quest-teaser">{item.teaser}</span>
+                      <span class="quest-open">{t.questlog.details}<i aria-hidden="true">+</i></span>
+                    </span>
+                  </button>
+                  <div class="quest-entry__details" id={`quest-details-${id}`} data-quest-details hidden>
+                    <div class="quest-detail-grid">
+                      <div>
+                        <p>{item.description}</p>
+                        <h3>{t.questlog.fitLabel}</h3>
+                        <p>{item.fit}</p>
+                      </div>
+                      <div>
+                        <h3>{locale === "de" ? "Typische Spielerlebnisse" : "Typical experiences"}</h3>
+                        <ul class="experience-list">{item.experiences.map((experience) => <li>{experience}</li>)}</ul>
+                        <h3>{item.variantsLabel}</h3>
+                        <div class="variant-list">
+                          {item.variants.map((variant) => (
+                            <div><strong>{variant.title}</strong><span>{variant.description}</span></div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section class="journey section" id="journey" aria-labelledby="journey-title">
+        <div class="page">
+          <header class="section-heading section-heading--split reveal">
+            <div>
+              <p class="kicker">{t.journey.kicker}</p>
+              <h2 id="journey-title">{t.journey.title}</h2>
+            </div>
+            <p>{t.journey.intro}</p>
+          </header>
+          <ol class="route-map">
+            {t.journey.steps.map(([label, stepTitle, text], index) => (
+              <li class:list={["route-stop", index === 2 && "route-stop--primary", "reveal"]}>
+                <span class="route-number">{String(index + 1).padStart(2, "0")}</span>
+                <div><small>{label}</small><h3>{stepTitle}</h3><p>{text}</p></div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section class="why section" id="why" aria-labelledby="why-title">
+        <div class="why-grid" aria-hidden="true"></div>
+        <div class="page">
+          <header class="why-heading reveal">
+            <p class="kicker">{t.why.kicker}</p>
+            <h2 id="why-title">{t.why.title}</h2>
+            <p>{t.why.intro}</p>
+          </header>
+          <div class="why-points">
+            {t.why.points.map(([label, pointTitle, text], index) => (
+              <article class="why-point reveal">
+                <span class="why-index">{String(index + 1).padStart(2, "0")}</span>
+                <small>{label}</small>
+                <h3>{pointTitle}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta section" aria-labelledby="cta-title">
+        <div class="cta-landscape" aria-hidden="true"></div>
+        <div class="page">
+          <div class="cta-panel reveal">
+            <p class="kicker">{t.cta.kicker}</p>
+            <h2 id="cta-title">{t.cta.title}</h2>
+            <p>{t.cta.text}</p>
+            <a class="button button--adventure button--large" href={requestHref}>{t.cta.button}</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer {locale} {homeHref} />
+    <a class="mobile-cta" href={requestHref}>{requestLabel}</a>
+  </div>
+
+  <script>
+    import "../scripts/home";
+  </script>
+</SiteLayout>

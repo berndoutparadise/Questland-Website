@@ -1,0 +1,162 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import { getContent } from "../data/content";
+import type { Locale } from "../data/quest";
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const t = getContent(locale);
+const homeHref = `/${locale}/`;
+const requestHref = locale === "de" ? "/de/anfrage/" : "/en/request/";
+const thanksHref = locale === "de" ? "/de/danke/" : "/en/thanks/";
+const privacyHref = locale === "de" ? "/de/datenschutz/" : "/en/privacy/";
+const title = `${t.request.title} · Questland`;
+const description = t.request.intro;
+const ages = ["5–7", "8–11", "12–15", "16+"];
+---
+
+<SiteLayout
+  {locale}
+  {title}
+  {description}
+  canonicalPath={requestHref}
+  alternateDe="/de/anfrage/"
+  alternateEn="/en/request/"
+>
+  <div class="site-shell site-shell--subpage" data-request-page data-locale={locale}>
+    <Header
+      {locale}
+      deHref="/de/anfrage/"
+      enHref="/en/request/"
+      {homeHref}
+      {requestHref}
+      simple
+    />
+
+    <main id="main" class="request-page">
+      <section class="request-hero">
+        <div class="page request-hero__grid">
+          <div class="request-intro reveal">
+            <p class="kicker">{t.request.kicker}</p>
+            <h1>{t.request.title}</h1>
+            <p>{t.request.intro}</p>
+            <div class="request-route" aria-hidden="true"><span></span><span></span><span></span></div>
+          </div>
+          <aside class="finder-summary reveal" data-form-summary>
+            <small>{t.request.selectedTitle}</small>
+            <p data-summary-empty>{t.request.noSelection}</p>
+            <dl data-summary-list hidden></dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="request-form-section">
+        <div class="page">
+          <form
+            class="quest-form reveal"
+            name="quest-request"
+            method="POST"
+            action={thanksHref}
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            data-request-form
+          >
+            <input type="hidden" name="form-name" value="quest-request" />
+            <input type="hidden" name="language" value={locale} />
+            <input type="hidden" name="questgiver-audience" value="" data-hidden-audience />
+            <input type="hidden" name="questgiver-ages" value="" data-hidden-ages />
+            <input type="hidden" name="questgiver-group-size" value="" data-hidden-size />
+            <input type="hidden" name="questgiver-style" value="" data-hidden-style />
+            <input type="hidden" name="questgiver-recommendation" value="" data-hidden-recommendation />
+            <p class="honeypot">
+              <label>Do not fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <fieldset>
+              <legend><span>01</span>{t.request.groups[0]}</legend>
+              <div class="form-grid form-grid--two">
+                <label>
+                  <span>{t.request.fields.name} <em>{t.request.required}</em></span>
+                  <input type="text" name="name" autocomplete="name" required />
+                </label>
+                <label>
+                  <span>{t.request.fields.email} <em>{t.request.required}</em></span>
+                  <input type="email" name="email" autocomplete="email" required />
+                </label>
+                <label>
+                  <span>{t.request.fields.phone}</span>
+                  <input type="tel" name="phone" autocomplete="tel" />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>02</span>{t.request.groups[1]}</legend>
+              <div class="form-grid form-grid--two">
+                <label>
+                  <span>{t.request.fields.audience} <em>{t.request.required}</em></span>
+                  <select name="audience" required>
+                    <option value=""></option>
+                    {t.request.options.audience.map((option) => <option>{option}</option>)}
+                  </select>
+                </label>
+                <label>
+                  <span>{t.request.fields.size} <em>{t.request.required}</em></span>
+                  <select name="group-size" required>
+                    <option value=""></option>
+                    {t.request.options.size.map((option) => <option>{option}</option>)}
+                  </select>
+                </label>
+              </div>
+              <fieldset class="checkbox-group">
+                <legend>{t.request.fields.ages}</legend>
+                <div class="checkbox-row">
+                  {ages.map((age) => (
+                    <label class="check-chip"><input type="checkbox" name="ages[]" value={age} /><span>{age}</span></label>
+                  ))}
+                </div>
+              </fieldset>
+              <div class="form-grid form-grid--two">
+                <label>
+                  <span>{t.request.fields.occasion}</span>
+                  <input type="text" name="occasion" placeholder={t.request.placeholders.occasion} />
+                </label>
+                <label>
+                  <span>{t.request.fields.location}</span>
+                  <input type="text" name="location" placeholder={t.request.placeholders.location} />
+                </label>
+                <label>
+                  <span>{t.request.fields.date}</span>
+                  <input type="text" name="preferred-date" placeholder={t.request.placeholders.date} />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>03</span>{t.request.groups[2]}</legend>
+              <label>
+                <span>{t.request.fields.message} <em>{t.request.required}</em></span>
+                <textarea name="message" rows="7" placeholder={t.request.placeholders.message} required></textarea>
+              </label>
+            </fieldset>
+
+            <label class="privacy-check">
+              <input type="checkbox" name="privacy-consent" required />
+              <span>{t.request.privacy} <a href={privacyHref}>{t.footer.privacy}</a></span>
+            </label>
+
+            <button class="button button--adventure button--large" type="submit">{t.request.submit}</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <Footer {locale} {homeHref} />
+  </div>
+
+  <script>
+    import "../scripts/request";
+  </script>
+</SiteLayout>

@@ -1,0 +1,53 @@
+---
+import type { Locale } from "../data/quest";
+import { getContent } from "../data/content";
+
+type Props = {
+  locale: Locale;
+  deHref: string;
+  enHref: string;
+  homeHref: string;
+  requestHref: string;
+  simple?: boolean;
+};
+
+const { locale, deHref, enHref, homeHref, requestHref, simple = false } = Astro.props;
+const t = getContent(locale);
+---
+
+<header class="site-header" data-header>
+  <a class="brand" href={homeHref} aria-label={`${t.brand} ${t.descriptor}`}>
+    <span class="brand-mark" aria-hidden="true"><span></span></span>
+    <span class="brand-copy">
+      <strong>{t.brand}</strong>
+      <small>{t.descriptor}</small>
+    </span>
+  </a>
+
+  <nav class="primary-nav" id="primary-nav" aria-label={locale === "de" ? "Hauptnavigation" : "Main navigation"} data-nav>
+    {!simple && (
+      <>
+        <a class="nav-quest" href={`${homeHref}#questgiver`}>{t.nav.questgiver}</a>
+        <a href={`${homeHref}#game-types`}>{t.nav.gameTypes}</a>
+        <a href={`${homeHref}#journey`}>{t.nav.journey}</a>
+        <a href={`${homeHref}#why`}>{t.nav.why}</a>
+      </>
+    )}
+    <a class="nav-adventure" href={requestHref}>{t.nav.start}</a>
+  </nav>
+
+  <div class="header-tools">
+    <div class="language-switch" aria-label={locale === "de" ? "Sprache auswählen" : "Choose language"}>
+      <a href={deHref} class:list={[locale === "de" && "is-active"]} data-lang-link="de" lang="de" hreflang="de">DE</a>
+      <span aria-hidden="true">/</span>
+      <a href={enHref} class:list={[locale === "en" && "is-active"]} data-lang-link="en" lang="en" hreflang="en">EN</a>
+    </div>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.nav.open} data-menu>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  import "../scripts/shared";
+</script>

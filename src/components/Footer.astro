@@ -1,0 +1,32 @@
+---
+import type { Locale } from "../data/quest";
+import { getContent } from "../data/content";
+
+type Props = { locale: Locale; homeHref: string };
+const { locale, homeHref } = Astro.props;
+const t = getContent(locale);
+const legalHref = locale === "de" ? "/de/impressum/" : "/en/legal-notice/";
+const privacyHref = locale === "de" ? "/de/datenschutz/" : "/en/privacy/";
+---
+
+<footer class="site-footer">
+  <div class="footer-main">
+    <a class="brand brand--footer" href={homeHref}>
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span class="brand-copy"><strong>{t.brand}</strong><small>{t.descriptor}</small></span>
+    </a>
+    <p>{t.footer.note}</p>
+    <div class="footer-contact">
+      <span>{t.footer.region}</span>
+      <a href="mailto:questlandgames@gmail.com">questlandgames@gmail.com</a>
+      <a href="tel:+4917681132495">+49 176 81132495</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} Questland</span>
+    <nav aria-label={locale === "de" ? "Rechtliche Hinweise" : "Legal information"}>
+      <a href={legalHref}>{t.footer.legal}</a>
+      <a href={privacyHref}>{t.footer.privacy}</a>
+    </nav>
+  </div>
+</footer>

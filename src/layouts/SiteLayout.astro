@@ -1,0 +1,56 @@
+---
+import "@fontsource/barlow-condensed/400.css";
+import "@fontsource/barlow-condensed/600.css";
+import "@fontsource/barlow-condensed/700.css";
+import "@fontsource-variable/manrope";
+import "../styles/global.css";
+import type { Locale } from "../data/quest";
+
+type Props = {
+  locale: Locale;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  alternateDe: string;
+  alternateEn: string;
+  ogImage?: string;
+  noindex?: boolean;
+};
+
+const { locale, title, description, canonicalPath, alternateDe, alternateEn, ogImage = "/og-v2.jpg", noindex = false } = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+const deUrl = new URL(alternateDe, Astro.site);
+const enUrl = new URL(alternateEn, Astro.site);
+const ogUrl = new URL(ogImage, Astro.site);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f1e5" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="de" href={deUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={deUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Questland" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{locale === "de" ? "Zum Inhalt springen" : "Skip to content"}</a>
+    <slot />
+  </body>
+</html>
