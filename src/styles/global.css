@@ -1622,7 +1622,7 @@ h3 {
 }
 
 .request-form-section {
-  padding: 85px 0 130px;
+  padding: 72px 0 112px;
 }
 
 .quest-form {
@@ -1638,22 +1638,27 @@ h3 {
 }
 
 .quest-form > fieldset {
+  display: block;
+  min-inline-size: 0;
   margin: 0;
-  padding: clamp(34px, 6vw, 66px);
+  padding: clamp(28px, 4vw, 48px);
   border: 0;
   border-bottom: 1px solid var(--line);
 }
 
 .quest-form > fieldset:nth-of-type(2) { background: var(--sage-light); }
+.quest-form > fieldset:nth-of-type(3) { background: #fffdf8; }
 
 .quest-form legend {
   display: flex;
   align-items: center;
   gap: 13px;
-  margin-bottom: 30px;
+  margin: 0 0 18px;
+  padding: 0;
   color: var(--forest-950);
   font-family: var(--font-display);
   font-size: 2.2rem;
+  line-height: 1;
   font-weight: 750;
 }
 
@@ -1670,7 +1675,7 @@ h3 {
 
 .form-grid {
   display: grid;
-  gap: 22px;
+  gap: 18px;
 }
 
 .form-grid--two {
@@ -1684,8 +1689,9 @@ h3 {
 
 .quest-form label > span {
   color: var(--forest-900);
-  font-size: .7rem;
+  font-size: .76rem;
   font-weight: 800;
+  line-height: 1.25;
 }
 
 .quest-form label em {
@@ -1702,18 +1708,34 @@ h3 {
 .quest-form select,
 .quest-form textarea {
   width: 100%;
-  min-height: 52px;
-  padding: 13px 15px;
+  min-height: 54px;
+  padding: 14px 16px;
   background: rgba(255, 255, 255, .82);
   border: 1px solid var(--line-strong);
-  border-radius: 12px;
+  border-radius: 14px;
   outline: none;
-  transition: border-color .2s ease, box-shadow .2s ease;
+  color: var(--forest-950);
+  font: inherit;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .quest-form textarea {
-  min-height: 180px;
+  min-height: 168px;
+  line-height: 1.5;
   resize: vertical;
+}
+
+.quest-form input:not([type="checkbox"]):hover,
+.quest-form select:hover,
+.quest-form textarea:hover {
+  background: var(--white);
+  border-color: rgba(47, 115, 87, .42);
+}
+
+.quest-form input::placeholder,
+.quest-form textarea::placeholder {
+  color: var(--ink-soft);
+  opacity: .78;
 }
 
 .quest-form input:focus,
@@ -1724,15 +1746,17 @@ h3 {
 }
 
 .checkbox-group {
-  margin: 24px 0;
+  margin: 22px 0 20px;
   padding: 0;
   border: 0;
 }
 
 .checkbox-group legend {
-  margin-bottom: 12px;
+  margin: 0 0 10px;
+  padding: 0;
   font-family: var(--font-body);
-  font-size: .7rem;
+  font-size: .74rem;
+  line-height: 1.25;
 }
 
 .checkbox-row {
@@ -1751,16 +1775,28 @@ h3 {
 }
 
 .check-chip span {
-  display: block;
-  padding: 9px 13px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 39px;
+  padding: 8px 14px;
   background: var(--white);
   border: 1px solid var(--line-strong);
   border-radius: 999px;
+  color: var(--forest-900);
+  font-size: .76rem;
+  font-weight: 750;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.check-chip:hover span {
+  border-color: rgba(242, 184, 75, .82);
+  transform: translateY(-1px);
 }
 
 .check-chip input:checked + span {
   background: #f5e6be;
   border-color: var(--gold);
+  box-shadow: 0 4px 12px rgba(220, 143, 35, .14);
 }
 
 .check-chip input:focus-visible + span {
@@ -1772,7 +1808,9 @@ h3 {
   display: flex;
   gap: 11px;
   align-items: flex-start;
-  margin: 28px clamp(34px, 6vw, 66px) 22px;
+  margin: 24px clamp(28px, 4vw, 48px) 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
   color: var(--ink-soft);
 }
 
@@ -1785,7 +1823,8 @@ h3 {
 
 .privacy-check span {
   max-width: 760px;
-  font-size: .72rem;
+  font-size: .75rem;
+  line-height: 1.5;
 }
 
 .privacy-check a {
@@ -1795,7 +1834,7 @@ h3 {
 
 .quest-form > .button {
   justify-self: start;
-  margin: 0 clamp(34px, 6vw, 66px) clamp(34px, 6vw, 66px);
+  margin: 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
 }
 
 .honeypot {
@@ -2088,12 +2127,16 @@ h3 {
 
   .request-hero { padding: 70px 0 55px; }
   .finder-summary { padding: 23px; }
-  .request-form-section { padding: 55px 0 95px; }
+  .request-form-section { padding: 52px 0 88px; }
   .quest-form { border-radius: 26px 26px 26px 7px; }
-  .quest-form > fieldset { padding: 29px 20px; }
+  .quest-form > fieldset { padding: 27px 20px; }
+  .quest-form legend { gap: 11px; margin-bottom: 15px; font-size: 1.85rem; }
+  .quest-form legend span { width: 35px; height: 35px; font-size: .86rem; }
+  .form-grid { gap: 16px; }
   .form-grid--two { grid-template-columns: 1fr; }
-  .privacy-check { margin: 24px 20px 18px; }
-  .quest-form > .button { width: calc(100% - 40px); margin: 0 20px 29px; }
+  .quest-form textarea { min-height: 155px; }
+  .privacy-check { margin: 22px 20px 18px; padding-top: 17px; }
+  .quest-form > .button { width: calc(100% - 40px); margin: 0 20px 27px; }
   .simple-page { padding: 130px 0 85px; }
   .simple-panel { padding: 36px 24px; border-radius: 28px 28px 28px 7px; }
 }
