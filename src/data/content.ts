@@ -6,7 +6,6 @@ export type PlayTypeContent = {
   teaser: string;
   description: string;
   fit: string;
-  experiences: string[];
   variantsLabel: string;
   variants: { title: string; description: string }[];
   imageAlt: string;
@@ -357,13 +356,12 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "Ein Monster treibt sein Unwesen. Könnt ihr es finden und besiegen?",
       description: "Monsterjagd ist ein kooperatives Spiel gegen einen oder mehrere NPC-Gegner. Gemeinsam verfolgt ihr ein klares Ziel und müsst eure Aufgabe erfüllen, ohne dem Monster zum Opfer zu fallen.",
       fit: "Perfekt für Gruppen, die lieber gemeinsam als gegeneinander spielen. Teamarbeit, Kommunikation, Beobachtungsgabe und taktisches Denken entscheiden darüber, ob ihr eure Mission erfolgreich abschließt.",
-      experiences: ["Spuren verfolgen", "Monster umgehen", "Missionsziel bergen", "Gemeinsam taktisch handeln"],
       variantsLabel: "Mögliche Varianten",
       variants: [
         { title: "Das Waldmonster", description: "Unser Klassiker – ein gefährliches Monster bewacht ein wichtiges Missionsziel." },
         { title: "Zombie-Angriff", description: "Überlebt gemeinsam und erfüllt eure Mission trotz der Bedrohung." }
       ],
-      imageAlt: "Kinder und Jugendliche planen im hellen Wald, wie sie ein vom Waldmonster bewachtes Missionsziel bergen."
+      imageAlt: "Vier Questland-Spieler verfolgen im farbenfrohen Wald gemeinsam ein Monster und sichern dabei den Weg mit Karte und Spielzeugausrüstung."
     },
     teamBattles: {
       title: "Teamkämpfe",
@@ -371,7 +369,6 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "Eure Lieblingsspielmodi aus Videospielen – endlich in der echten Welt.",
       description: "Tretet in spannenden Team-gegen-Team-Duellen gegeneinander an. Unterschiedliche Spielmodi, wechselnde Ziele und taktische Entscheidungen sorgen dafür, dass jede Runde anders verläuft.",
       fit: "Ideal für Gruppen, die Action, Wettbewerb und Teamplay lieben. Von einfachen Spielmodi für Kinder bis hin zu komplexen Klassen-, Heilungs- und Versorgungssystemen für erfahrene Spieler lässt sich der Schwierigkeitsgrad flexibel anpassen.",
-      experiences: ["Flaggen erobern", "VIPs eskortieren", "Gebiete halten", "Mehrere Runden spielen"],
       variantsLabel: "Mögliche Varianten",
       variants: [
         { title: "Wasserschlacht", description: "Der Klassiker für jedes Alter." },
@@ -379,7 +376,7 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
         { title: "Battle Royale", description: "Jeder kämpft für sich – bis nur noch einer übrig bleibt." },
         { title: "Kill the DJ", description: "Eine besondere VIP-Mission für Festivals und Events." }
       ],
-      imageAlt: "Zwei farbig markierte Teams aus Kindern und Jugendlichen spielen auf einer sonnigen Wiese um eine grüne Flagge."
+      imageAlt: "Zwei farbig markierte Teams liefern sich auf einer sonnigen Wiese eine dynamische Wasserschlacht mit bunten Spielzeug-Wasserpistolen."
     },
     adventure: {
       title: "Abenteuer",
@@ -387,14 +384,13 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "Erkundet unbekannte Orte, löst Rätsel und erlebt eure eigene Geschichte.",
       description: "Abenteuer verbinden Erkundung, Rätsel, Aufgaben und spannende Begegnungen zu einer fortlaufenden Geschichte. Eure Entscheidungen beeinflussen den Verlauf des Spiels und führen euch Schritt für Schritt ans Ziel.",
       fit: "Für Gruppen, die gerne entdecken, kombinieren und gemeinsam in eine Geschichte eintauchen. Je nach Alter und Spielstil können Abenteuer ruhig und rätselorientiert oder actionreich gestaltet werden.",
-      experiences: ["Orte entdecken", "Hinweise kombinieren", "Rätsel lösen", "Entscheidungen treffen"],
       variantsLabel: "Mögliche Varianten",
       variants: [
         { title: "Schatzsuche", description: "Kindgerechte Abenteuer für die jüngsten Entdecker." },
         { title: "Action-Abenteuer", description: "Mehr Kämpfe, mehr Herausforderungen und mehr Adrenalin." },
         { title: "Lost Place Story", description: "Mysteriöse Orte, spannende Rätsel und düstere Geheimnisse." }
       ],
-      imageAlt: "Kinder und Jugendliche lösen bei Tageslicht mit Karte, Hinweisen und Scanner ein Rätsel an einer Burgruine."
+      imageAlt: "Vier Questland-Spieler lösen bei Tageslicht mit Karte, Kompass und Ausrüstung ein Rätsel an einem überwucherten Steintor."
     },
     deduction: {
       title: "Undercover",
@@ -402,13 +398,12 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "Ein Verräter befindet sich in eurer Gruppe. Könnt ihr ihn rechtzeitig entlarven?",
       description: "Jeder Spieler erhält eine geheime Rolle mit eigenen Zielen. Während einige versuchen, die Mission zu erfüllen, arbeiten andere im Verborgenen gegen die Gruppe. Beobachtung, Kommunikation und Menschenkenntnis sind der Schlüssel zum Erfolg.",
       fit: "Perfekt für Gruppen, die lieber kombinieren als kämpfen. Wer aufmerksam beobachtet, clever argumentiert und die richtigen Schlüsse zieht, hat die besten Chancen, Freund und Feind zu unterscheiden.",
-      experiences: ["Geheime Rollen", "Hinweise diskutieren", "Vertrauen prüfen", "Verräter entlarven"],
       variantsLabel: "Mögliche Varianten",
       variants: [
         { title: "Vampirjäger", description: "Social Deduction kombiniert mit kleinen LARP-Elementen." },
         { title: "Geheimagenten", description: "Ein Agentenspiel mit verdeckten Rollen und geheimen Informationen." }
       ],
-      imageAlt: "Kinder und Jugendliche diskutieren an einem hellen Feldlager über geheime Rollen und verdächtige Hinweise."
+      imageAlt: "In einer hell beleuchteten Waldhütte liegt eine Spielerin am Boden, während zwei Mitspieler diskutieren und eine vierte Figur heimlich ein Spielzeugmesser versteckt."
     },
     missions: {
       title: "Spezialmissionen",
@@ -416,13 +411,12 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "Mehr Zeit. Mehr Taktik. Mehr Möglichkeiten. Seid ihr bereit für eure größte Herausforderung?",
       description: "Spezialmissionen sind unsere größten und anspruchsvollsten Abenteuer. Mehrere Missionsziele, taktische Entscheidungen und ein abwechslungsreicher Spielverlauf stellen eure Gruppe immer wieder vor neue Herausforderungen.",
       fit: "Ideal für Jugendliche und Erwachsene, die Lust auf ein anspruchsvolleres und taktischeres Spielerlebnis haben. Spezialmissionen belohnen Planung, Teamarbeit und kluge Entscheidungen und bieten deutlich mehr Freiheiten als unsere klassischen Quests.",
-      experiences: ["Routen planen", "Mehrere Objectives", "Spielarten kombinieren", "Längere Missionen"],
       variantsLabel: "Beispiel-Quests",
       variants: [
         { title: "Hinter feindlichen Linien", description: "Eskortiert einen VIP sicher durch gefährliches Gebiet." },
         { title: "Zombie-Apokalypse", description: "Findet das Gegenmittel, bevor die Zeit abläuft." }
       ],
-      imageAlt: "Jugendliche planen bei goldenem Tageslicht mehrere Missionsziele in einem weitläufigen Gelände."
+      imageAlt: "Vier Questland-Spieler bewegen sich gebückt und taktisch durch ein farbenfrohes, überwachsenes trockenes Flussbett."
     }
   },
   en: {
@@ -432,13 +426,12 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "A monster is causing trouble. Can you track it down and defeat it?",
       description: "Monster Hunt is a cooperative game against one or more NPC opponents. Work toward a clear objective and complete the mission without falling victim to the monster.",
       fit: "Perfect for groups that prefer working together. Teamwork, communication, observation and tactical thinking decide whether the mission succeeds.",
-      experiences: ["Follow tracks", "Avoid the monster", "Retrieve the objective", "Act as a team"],
       variantsLabel: "Possible variations",
       variants: [
         { title: "The Forest Monster", description: "Our classic: a dangerous creature guards an important mission objective." },
         { title: "Zombie Attack", description: "Survive together and complete the mission despite the threat." }
       ],
-      imageAlt: "Children and teenagers plan how to retrieve an objective guarded by a forest monster in bright woodland."
+      imageAlt: "Four Questland players track a monster through bright woodland while using a map and colourful toy equipment to secure the route."
     },
     teamBattles: {
       title: "Team Battles",
@@ -446,7 +439,6 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "Your favourite video-game modes – finally in the real world.",
       description: "Compete in exciting team-against-team rounds. Changing game modes, objectives and tactical choices make every round feel different.",
       fit: "Ideal for groups that love action, competition and teamplay. The difficulty can range from simple children’s modes to classes, healing and supply systems for experienced players.",
-      experiences: ["Capture flags", "Escort VIPs", "Hold areas", "Play several rounds"],
       variantsLabel: "Possible variations",
       variants: [
         { title: "Water Battle", description: "A classic for every age." },
@@ -454,7 +446,7 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
         { title: "Battle Royale", description: "Every player for themselves until one remains." },
         { title: "Kill the DJ", description: "A special VIP mission for festivals and events." }
       ],
-      imageAlt: "Two colour-coded teams of children and teenagers play for a green flag in a sunny meadow."
+      imageAlt: "Two colour-coded teams compete in a dynamic water battle on a sunny meadow with colourful toy water blasters."
     },
     adventure: {
       title: "Adventure",
@@ -462,14 +454,13 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "Explore unknown places, solve puzzles and experience your own story.",
       description: "Adventures combine exploration, puzzles, tasks and encounters into one continuous story. Your decisions shape the game and lead you step by step toward the objective.",
       fit: "For groups that love discovering, combining clues and becoming part of a story. Adventures can be calm and puzzle-led or full of action.",
-      experiences: ["Discover places", "Connect clues", "Solve puzzles", "Make decisions"],
       variantsLabel: "Possible variations",
       variants: [
         { title: "Treasure Hunt", description: "Child-friendly adventures for the youngest explorers." },
         { title: "Action Adventure", description: "More battles, more challenges and more adrenaline." },
         { title: "Lost Place Story", description: "Mysterious places, intriguing puzzles and dark secrets." }
       ],
-      imageAlt: "Children and teenagers use a map, clues and a scanner to solve a puzzle at a sunlit castle ruin."
+      imageAlt: "Four Questland players use a map, compass and adventure gear to solve a puzzle at an overgrown stone gate in daylight."
     },
     deduction: {
       title: "Undercover",
@@ -477,13 +468,12 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "There is a traitor in your group. Can you expose them in time?",
       description: "Every player receives a secret role and their own objectives. Some work to complete the mission while others act against the group. Observation, communication and reading people are the keys to success.",
       fit: "Perfect for groups that prefer deduction over combat. Careful observation, smart arguments and good conclusions help separate friend from foe.",
-      experiences: ["Secret roles", "Discuss clues", "Question trust", "Expose the traitor"],
       variantsLabel: "Possible variations",
       variants: [
         { title: "Vampire Hunters", description: "Social deduction with light LARP elements." },
         { title: "Secret Agents", description: "An agent game with hidden roles and secret information." }
       ],
-      imageAlt: "Children and teenagers at a bright field camp debate secret roles and suspicious evidence."
+      imageAlt: "Inside a brightly lit woodland cabin, one player lies on the floor while two teammates argue and another secretly hides a toy knife."
     },
     missions: {
       title: "Special Missions",
@@ -491,13 +481,12 @@ export const playTypes: Record<Locale, Record<PlayTypeId, PlayTypeContent>> = {
       teaser: "More time. More tactics. More possibilities. Ready for your biggest challenge?",
       description: "Special Missions are our largest and most demanding adventures. Multiple objectives, tactical decisions and a varied game flow keep presenting the group with new challenges.",
       fit: "Ideal for teenagers and adults looking for a deeper tactical experience. Special Missions reward planning, teamwork and smart choices and offer more freedom than our classic quests.",
-      experiences: ["Plan routes", "Multiple objectives", "Combine game types", "Play longer missions"],
       variantsLabel: "Example quests",
       variants: [
         { title: "Behind Enemy Lines", description: "Escort a VIP safely through dangerous territory." },
         { title: "Zombie Apocalypse", description: "Find the antidote before time runs out." }
       ],
-      imageAlt: "Teenagers plan several objectives across a large landscape in bright golden-hour light."
+      imageAlt: "Four Questland players move in a crouched tactical formation through a colourful, overgrown dry riverbed."
     }
   }
 };

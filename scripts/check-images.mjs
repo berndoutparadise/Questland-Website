@@ -1,14 +1,13 @@
 import sharp from "sharp";
 
 const files = [
-  "src/assets/images/v2/hero-desktop.png",
-  "src/assets/images/hero-mobile.png",
-  "src/assets/images/questgiver.png",
-  "src/assets/images/v2/monster-hunt.png",
-  "src/assets/images/v2/team-battles.png",
-  "src/assets/images/v2/adventure.png",
-  "src/assets/images/v2/undercover.png",
-  "src/assets/images/v2/special-mission.png",
+  "src/assets/images/v3/hero-keyart-v2.png",
+  "src/assets/images/v3/questgiver-keyart-v2.png",
+  "src/assets/images/v3/monster-hunt-master-v3-team-signal-color-pass.png",
+  "src/assets/images/v3/team-battles-keyart-v1.png",
+  "src/assets/images/v3/adventure-stone-puzzle-keyart-v3-physical-puzzle-bright.png",
+  "src/assets/images/v3/undercover-keyart-v2.png",
+  "src/assets/images/v3/special-mission-keyart-v3.png",
   "public/og-v2.jpg"
 ];
 

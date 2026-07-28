@@ -1,0 +1,111 @@
+<svg
+  class="questland-portal-mark"
+  viewBox="0 0 64 64"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <radialGradient id="portal-core" cx="50%" cy="48%" r="68%">
+      <stop offset="0" stop-color="#e9ff9a" />
+      <stop offset=".38" stop-color="#b9dd54" />
+      <stop offset=".76" stop-color="#387950" />
+      <stop offset="1" stop-color="#0d3022" />
+    </radialGradient>
+    <linearGradient id="portal-ring" x1="10%" y1="4%" x2="88%" y2="96%">
+      <stop offset="0" stop-color="#527c5a" />
+      <stop offset=".3" stop-color="#2f7357" />
+      <stop offset=".72" stop-color="#153f2e" />
+      <stop offset="1" stop-color="#08251c" />
+    </linearGradient>
+    <linearGradient id="portal-tail" x1="15%" y1="8%" x2="86%" y2="92%">
+      <stop offset="0" stop-color="#5c8c61" />
+      <stop offset=".38" stop-color="#1c5842" />
+      <stop offset="1" stop-color="#08251c" />
+    </linearGradient>
+    <filter id="portal-glow" x="-55%" y="-55%" width="210%" height="210%">
+      <feGaussianBlur stdDeviation="2.1" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="portal-shadow" x="-35%" y="-35%" width="180%" height="190%">
+      <feDropShadow dx="0" dy="2.2" stdDeviation="1.5" flood-color="#061810" flood-opacity=".72" />
+    </filter>
+  </defs>
+
+  <g filter="url(#portal-shadow)">
+    <circle cx="31.5" cy="29.5" r="23.9" fill="#071b14" stroke="#061710" stroke-width="1.4" />
+    <circle
+      cx="31.5"
+      cy="29.5"
+      r="22.7"
+      fill="none"
+      stroke="#061a13"
+      stroke-width="11.7"
+      stroke-linecap="round"
+      stroke-dasharray="14.5 2.7"
+    />
+    <circle
+      cx="31.5"
+      cy="29.5"
+      r="22.7"
+      fill="none"
+      stroke="url(#portal-ring)"
+      stroke-width="9.3"
+      stroke-linecap="round"
+      stroke-dasharray="14.5 2.7"
+    />
+    <circle
+      cx="31.5"
+      cy="29.5"
+      r="18.1"
+      fill="#0b2c20"
+      stroke="#0a2118"
+      stroke-width="1.2"
+    />
+    <circle cx="31.5" cy="29.5" r="15.7" fill="url(#portal-core)" filter="url(#portal-glow)" />
+    <path
+      d="M20.4 31.2c1.2-6.4 8.2-10.2 14.8-8.4 5.9 1.6 8.8 7.3 6.3 12.1-2.1 4.1-7.5 6-11.6 3.7-3.3-1.9-3.5-5.9-.7-7.8 2.1-1.4 5.1-.5 5.5 1.7"
+      fill="none"
+      stroke="#e4ff91"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      opacity=".72"
+    />
+    <path
+      d="M14 18.7c4.8-7.4 14.4-11 23.3-8.8"
+      fill="none"
+      stroke="#91b579"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      opacity=".58"
+    />
+  </g>
+
+  <path
+    d="M37.1 37.4 58.5 58.7l-7.2 3.7-20.8-20.8z"
+    fill="#061a13"
+    stroke="#04120d"
+    stroke-width="1.15"
+    stroke-linejoin="round"
+  />
+  <path
+    d="m38.3 38.6 18.5 18.5-4.9 2.3-17.8-17.8z"
+    fill="url(#portal-tail)"
+  />
+  <path
+    d="m36.1 41 14.9 14.9"
+    fill="none"
+    stroke="#b9dd54"
+    stroke-width="1.25"
+    stroke-linecap="round"
+    opacity=".82"
+  />
+  <path
+    d="m51.3 61.1 7.2-2.4-3.6 3.9z"
+    fill="#f2b84b"
+    opacity=".9"
+  />
+</svg>

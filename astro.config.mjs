@@ -1,7 +1,10 @@
 import { defineConfig } from "astro/config";
 
+const isGithubPages = process.env.DEPLOY_TARGET === "github";
+
 export default defineConfig({
-  site: "https://questland.eu",
+  site: isGithubPages ? "https://berndoutparadise.github.io" : "https://questland.eu",
+  base: isGithubPages ? "/Questland-Website" : "",
   output: "static",
   trailingSlash: "always",
   i18n: {

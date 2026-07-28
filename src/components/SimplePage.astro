@@ -4,6 +4,7 @@ import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import { getContent } from "../data/content";
 import type { Locale } from "../data/quest";
+import { localePath, withBase } from "../utils/sitePaths";
 
 type Props = {
   locale: Locale;
@@ -12,8 +13,10 @@ type Props = {
 
 const { locale, kind } = Astro.props;
 const t = getContent(locale);
-const homeHref = `/${locale}/`;
-const requestHref = locale === "de" ? "/de/anfrage/" : "/en/request/";
+const homePath = localePath(locale);
+const homeHref = withBase(homePath);
+const requestPath = locale === "de" ? localePath("de", "/anfrage/") : localePath("en", "/request/");
+const requestHref = withBase(requestPath);
 const isThanks = kind === "thanks";
 const titleMap = {
   de: { legal: "Impressum", privacy: "Datenschutz" },
@@ -21,12 +24,12 @@ const titleMap = {
 };
 const pageTitle = isThanks ? t.thanks.title : titleMap[locale][kind as "legal" | "privacy"];
 const canonicalPath = isThanks
-  ? locale === "de" ? "/de/danke/" : "/en/thanks/"
+  ? locale === "de" ? localePath("de", "/danke/") : localePath("en", "/thanks/")
   : kind === "legal"
-    ? locale === "de" ? "/de/impressum/" : "/en/legal-notice/"
-    : locale === "de" ? "/de/datenschutz/" : "/en/privacy/";
-const alternateDe = isThanks ? "/de/danke/" : kind === "legal" ? "/de/impressum/" : "/de/datenschutz/";
-const alternateEn = isThanks ? "/en/thanks/" : kind === "legal" ? "/en/legal-notice/" : "/en/privacy/";
+    ? locale === "de" ? localePath("de", "/impressum/") : localePath("en", "/legal-notice/")
+    : locale === "de" ? localePath("de", "/datenschutz/") : localePath("en", "/privacy/");
+const alternateDe = isThanks ? localePath("de", "/danke/") : kind === "legal" ? localePath("de", "/impressum/") : localePath("de", "/datenschutz/");
+const alternateEn = isThanks ? localePath("en", "/thanks/") : kind === "legal" ? localePath("en", "/legal-notice/") : localePath("en", "/privacy/");
 ---
 
 <SiteLayout
@@ -41,8 +44,8 @@ const alternateEn = isThanks ? "/en/thanks/" : kind === "legal" ? "/en/legal-not
   <div class="site-shell site-shell--subpage">
     <Header
       {locale}
-      deHref={alternateDe}
-      enHref={alternateEn}
+      deHref={withBase(alternateDe)}
+      enHref={withBase(alternateEn)}
       {homeHref}
       {requestHref}
       simple

@@ -10,16 +10,23 @@ Avoid photorealism, stock-photo faces, skin pores, individual photographic hair 
 
 ## Recurring core team
 
-The V2 scenes use the same four young protagonists:
+The binding master reference is stored at
+`reference-groups/master/questland-core-team-master.png`.
 
-- child around 9 with lime equipment
-- child around 11 with blue equipment
-- teenager around 14 with orange equipment
-- teenager around 16 with forest/teal equipment
+This image is the single source of truth for all future Questland key art:
 
-The characters are friendly, capable and curious. Their colour-coded clothing, backpacks and harmless game devices create continuity between scenes. Adults appear only in supporting roles such as the Questgiver, game master, parent, teacher or NPC.
+- Blue: curious young strategist with map, blue outdoor clothing and dark wavy hair.
+- Orange: confident pathfinder with compass, orange outdoor clothing, freckles and a curly braided ponytail.
+- Green: friendly technology-focused explorer with scanner, forest-green outdoor clothing and high-top coils.
+- Lime: capable girl around 9–10 with lime outdoor clothing, an asymmetrical black bob and her spherical exploration robot.
 
-The internal reference is stored at `v2/cast-reference.png`. The existing `hero-mobile.png` is the rendering and colour reference. The existing `questgiver.png` remains the adult Questgiver.
+Faces, hairstyles, clothing designs, colour assignments, relative proportions and
+signature equipment are locked. New key art must adapt its scene, pose, lighting and
+camera perspective to these characters. If generation introduces inconsistencies,
+correct the new image to match the master reference; never alter the master reference
+to match a later image.
+
+The existing `questgiver.png` remains the adult Questgiver.
 
 ## Hero desktop V2
 

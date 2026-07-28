@@ -1,18 +1,20 @@
 ---
 import type { Locale } from "../data/quest";
 import { getContent } from "../data/content";
+import { localePath, withBase } from "../utils/sitePaths";
+import QuestlandMark from "./QuestlandMark.astro";
 
 type Props = { locale: Locale; homeHref: string };
 const { locale, homeHref } = Astro.props;
 const t = getContent(locale);
-const legalHref = locale === "de" ? "/de/impressum/" : "/en/legal-notice/";
-const privacyHref = locale === "de" ? "/de/datenschutz/" : "/en/privacy/";
+const legalHref = withBase(locale === "de" ? localePath("de", "/impressum/") : localePath("en", "/legal-notice/"));
+const privacyHref = withBase(locale === "de" ? localePath("de", "/datenschutz/") : localePath("en", "/privacy/"));
 ---
 
 <footer class="site-footer">
   <div class="footer-main">
     <a class="brand brand--footer" href={homeHref}>
-      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span class="brand-mark" aria-hidden="true"><QuestlandMark /></span>
       <span class="brand-copy"><strong>{t.brand}</strong><small>{t.descriptor}</small></span>
     </a>
     <p>{t.footer.note}</p>

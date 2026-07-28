@@ -4,14 +4,19 @@ import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import { getContent } from "../data/content";
 import type { Locale } from "../data/quest";
+import { localePath, withBase } from "../utils/sitePaths";
 
 type Props = { locale: Locale };
 const { locale } = Astro.props;
 const t = getContent(locale);
-const homeHref = `/${locale}/`;
-const requestHref = locale === "de" ? "/de/anfrage/" : "/en/request/";
-const thanksHref = locale === "de" ? "/de/danke/" : "/en/thanks/";
-const privacyHref = locale === "de" ? "/de/datenschutz/" : "/en/privacy/";
+const homePath = localePath(locale);
+const homeHref = withBase(homePath);
+const requestPath = locale === "de" ? localePath("de", "/anfrage/") : localePath("en", "/request/");
+const requestHref = withBase(requestPath);
+const thanksPath = locale === "de" ? localePath("de", "/danke/") : localePath("en", "/thanks/");
+const thanksHref = withBase(thanksPath);
+const privacyPath = locale === "de" ? localePath("de", "/datenschutz/") : localePath("en", "/privacy/");
+const privacyHref = withBase(privacyPath);
 const title = `${t.request.title} · Questland`;
 const description = t.request.intro;
 const ages = ["5–7", "8–11", "12–15", "16+"];
@@ -21,15 +26,15 @@ const ages = ["5–7", "8–11", "12–15", "16+"];
   {locale}
   {title}
   {description}
-  canonicalPath={requestHref}
-  alternateDe="/de/anfrage/"
-  alternateEn="/en/request/"
+  canonicalPath={requestPath}
+  alternateDe={localePath("de", "/anfrage/")}
+  alternateEn={localePath("en", "/request/")}
 >
   <div class="site-shell site-shell--subpage" data-request-page data-locale={locale}>
     <Header
       {locale}
-      deHref="/de/anfrage/"
-      enHref="/en/request/"
+      deHref={withBase(localePath("de", "/anfrage/"))}
+      enHref={withBase(localePath("en", "/request/"))}
       {homeHref}
       {requestHref}
       simple

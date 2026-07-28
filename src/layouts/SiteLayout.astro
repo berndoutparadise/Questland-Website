@@ -5,6 +5,7 @@ import "@fontsource/barlow-condensed/700.css";
 import "@fontsource-variable/manrope";
 import "../styles/global.css";
 import type { Locale } from "../data/quest";
+import { withBase } from "../utils/sitePaths";
 
 type Props = {
   locale: Locale;
@@ -18,10 +19,10 @@ type Props = {
 };
 
 const { locale, title, description, canonicalPath, alternateDe, alternateEn, ogImage = "/og-v2.jpg", noindex = false } = Astro.props;
-const canonical = new URL(canonicalPath, Astro.site);
-const deUrl = new URL(alternateDe, Astro.site);
-const enUrl = new URL(alternateEn, Astro.site);
-const ogUrl = new URL(ogImage, Astro.site);
+const canonical = new URL(withBase(canonicalPath), Astro.site);
+const deUrl = new URL(withBase(alternateDe), Astro.site);
+const enUrl = new URL(withBase(alternateEn), Astro.site);
+const ogUrl = new URL(withBase(ogImage), Astro.site);
 ---
 
 <!doctype html>

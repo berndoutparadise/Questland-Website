@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "../data/quest";
 import { getContent } from "../data/content";
+import QuestlandMark from "./QuestlandMark.astro";
 
 type Props = {
   locale: Locale;
@@ -17,7 +18,7 @@ const t = getContent(locale);
 
 <header class="site-header" data-header>
   <a class="brand" href={homeHref} aria-label={`${t.brand} ${t.descriptor}`}>
-    <span class="brand-mark" aria-hidden="true"><span></span></span>
+    <span class="brand-mark" aria-hidden="true"><QuestlandMark /></span>
     <span class="brand-copy">
       <strong>{t.brand}</strong>
       <small>{t.descriptor}</small>

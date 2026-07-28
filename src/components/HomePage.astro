@@ -5,21 +5,23 @@ import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import { getContent, playTypes } from "../data/content";
 import type { Locale, PlayTypeId } from "../data/quest";
+import { localePath, withBase } from "../utils/sitePaths";
 
-import heroDesktop from "../assets/images/v2/hero-desktop.png";
-import heroMobile from "../assets/images/hero-mobile.png";
-import questgiver from "../assets/images/questgiver.png";
-import monsterImage from "../assets/images/v2/monster-hunt.png";
-import teamImage from "../assets/images/v2/team-battles.png";
-import adventureImage from "../assets/images/v2/adventure.png";
-import undercoverImage from "../assets/images/v2/undercover.png";
-import missionImage from "../assets/images/v2/special-mission.png";
+import heroImage from "../assets/images/v3/hero-keyart-v2.png";
+import questgiver from "../assets/images/v3/questgiver-keyart-v2.png";
+import monsterImage from "../assets/images/v3/monster-hunt-master-v3-team-signal-color-pass.png";
+import teamImage from "../assets/images/v3/team-battles-keyart-v1.png";
+import adventureImage from "../assets/images/v3/adventure-stone-puzzle-keyart-v3-physical-puzzle-bright.png";
+import undercoverImage from "../assets/images/v3/undercover-keyart-v2.png";
+import missionImage from "../assets/images/v3/special-mission-keyart-v3.png";
 
 type Props = { locale: Locale };
 const { locale } = Astro.props;
 const t = getContent(locale);
-const homeHref = `/${locale}/`;
-const requestHref = locale === "de" ? "/de/anfrage/" : "/en/request/";
+const homePath = localePath(locale);
+const homeHref = withBase(homePath);
+const requestPath = locale === "de" ? localePath("de", "/anfrage/") : localePath("en", "/request/");
+const requestHref = withBase(requestPath);
 const imageMap = {
   monsterHunt: monsterImage,
   teamBattles: teamImage,
@@ -37,15 +39,15 @@ const requestLabel = t.nav.start;
   {locale}
   {title}
   {description}
-  canonicalPath={homeHref}
-  alternateDe="/de/"
-  alternateEn="/en/"
+  canonicalPath={homePath}
+  alternateDe={localePath("de")}
+  alternateEn={localePath("en")}
 >
   <div class="site-shell" data-home data-locale={locale}>
     <Header
       {locale}
-      deHref="/de/"
-      enHref="/en/"
+      deHref={withBase(localePath("de"))}
+      enHref={withBase(localePath("en"))}
       {homeHref}
       {requestHref}
     />
@@ -55,7 +57,7 @@ const requestLabel = t.nav.start;
         <div class="hero-art" aria-hidden="true">
           <div class="hero-art__desktop">
             <Picture
-              src={heroDesktop}
+              src={heroImage}
               formats={["avif", "webp"]}
               widths={[960, 1440, 1920]}
               sizes="64vw"
@@ -66,7 +68,7 @@ const requestLabel = t.nav.start;
           </div>
           <div class="hero-art__mobile">
             <Picture
-              src={heroMobile}
+              src={heroImage}
               formats={["avif", "webp"]}
               widths={[480, 780, 960]}
               sizes="100vw"
@@ -106,7 +108,7 @@ const requestLabel = t.nav.start;
                 formats={["avif", "webp"]}
                 widths={[420, 620, 820]}
                 sizes="(max-width: 760px) 100vw, 38vw"
-                alt={locale === "de" ? "Der stilisierte Questgeber mit Glatze, Bart, Karte und Kompass." : "The stylised bald, bearded quest giver holding a map and compass."}
+                alt={locale === "de" ? "Der stilisierte Questgeber mit Glatze, kurzem Bart, weinrotem Mantel, Karte und Kompass." : "The stylised bald quest giver with a short beard, wine-red coat, map and compass."}
                 loading="lazy"
               />
               <div class="character-badge"><span></span>{locale === "de" ? "QUESTGEBER · ONLINE" : "QUEST GIVER · ONLINE"}</div>
@@ -210,20 +212,20 @@ const requestLabel = t.nav.start;
                       </button>
                       <div class="quest-entry__details" id={`quest-details-${id}`} data-quest-details hidden>
                         <div class="quest-detail-grid">
-                          <div>
-                            <p>{item.description}</p>
-                            <h3>{t.questlog.fitLabel}</h3>
-                            <p>{item.fit}</p>
-                          </div>
-                          <div>
-                            <h3>{locale === "de" ? "Typische Spielerlebnisse" : "Typical experiences"}</h3>
-                            <ul class="experience-list">{item.experiences.map((experience) => <li>{experience}</li>)}</ul>
-                            <h3>{item.variantsLabel}</h3>
-                            <div class="variant-list">
-                              {item.variants.map((variant) => (
-                                <div><strong>{variant.title}</strong><span>{variant.description}</span></div>
-                              ))}
+                          <div class="quest-detail-copy">
+                            <p class="quest-detail-lead">{item.description}</p>
+                            <div class="quest-detail-fit">
+                              <h3>{t.questlog.fitLabel}</h3>
+                              <p>{item.fit}</p>
                             </div>
+                          </div>
+                          <div class="quest-detail-variants">
+                            <h3 class="quest-variants-heading">{item.variantsLabel}</h3>
+                            <ul class="variant-list">
+                              {item.variants.map((variant) => (
+                                <li><strong>{variant.title}</strong><span>{variant.description}</span></li>
+                              ))}
+                            </ul>
                           </div>
                         </div>
                       </div>
