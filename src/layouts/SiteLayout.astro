@@ -18,7 +18,7 @@ type Props = {
   noindex?: boolean;
 };
 
-const { locale, title, description, canonicalPath, alternateDe, alternateEn, ogImage = "/og-v2.jpg", noindex = false } = Astro.props;
+const { locale, title, description, canonicalPath, alternateDe, alternateEn, ogImage = "/og-v3.jpg", noindex = false } = Astro.props;
 const canonical = new URL(withBase(canonicalPath), Astro.site);
 const deUrl = new URL(withBase(alternateDe), Astro.site);
 const enUrl = new URL(withBase(alternateEn), Astro.site);

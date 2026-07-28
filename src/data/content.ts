@@ -143,7 +143,7 @@ const shared = {
       intro: "Je mehr wir über eure Gruppe, eure Lieblingsspiele und euren Spielort wissen, desto besser können wir ein passendes Spiel entwickeln.",
       selectedTitle: "Auswahl des Questgebers",
       noSelection: "Noch keine Questgeber-Auswahl vorhanden. Das ist kein Problem – beschreibt uns einfach, worauf ihr Lust habt.",
-      groups: ["Kontakt", "Eure Gruppe", "Eure Spielidee"],
+      groups: ["Kontakt", "Eure Gruppe", "Euer Spiel"],
       fields: {
         name: "Name",
         email: "E-Mail",

@@ -573,12 +573,16 @@ h3 {
   color: var(--forest-950);
 }
 
-.section-heading > p,
+.section-heading > p:not(.section-kicker),
 .section-heading--split > p {
   max-width: 42ch;
   color: var(--ink-soft);
   font-size: clamp(1rem, 1.25vw, 1.12rem);
   line-height: 1.58;
+}
+
+.section-kicker {
+  font-size: clamp(.75rem, .8vw, .88rem);
 }
 
 .questgiver {
@@ -1302,14 +1306,15 @@ h3 {
 .why-heading {
   display: grid;
   grid-template-columns: 1fr .75fr;
-  gap: clamp(40px, 8vw, 120px);
+  column-gap: clamp(40px, 8vw, 120px);
+  row-gap: 18px;
   align-items: end;
   margin-bottom: 62px;
 }
 
 .why-heading .kicker {
   grid-column: 1 / -1;
-  margin-bottom: -25px;
+  margin-bottom: 0;
   color: var(--lime);
 }
 
@@ -1318,7 +1323,7 @@ h3 {
   color: var(--white);
 }
 
-.why-heading > p {
+.why-heading > p:not(.section-kicker) {
   margin: 0;
   color: rgba(255, 255, 255, .72);
   font-size: clamp(1rem, 1.25vw, 1.12rem);

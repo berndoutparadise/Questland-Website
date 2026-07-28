@@ -8,7 +8,9 @@ const files = [
   "src/assets/images/v3/adventure-stone-puzzle-keyart-v3-physical-puzzle-bright.png",
   "src/assets/images/v3/undercover-keyart-v2.png",
   "src/assets/images/v3/special-mission-keyart-v3.png",
-  "public/og-v2.jpg"
+  "src/assets/images/v3/social-preview-v3-current-group.png",
+  "public/og-v2.jpg",
+  "public/og-v3.jpg"
 ];
 
 for (const file of files) {
