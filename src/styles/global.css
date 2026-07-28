@@ -2140,7 +2140,10 @@ h3 {
     height: 470px;
   }
   .hero-art img { object-position: 50% 46%; --hero-shift: 0%; }
-  .hero-content { min-height: 920px; }
+  .hero {
+    padding-bottom: 32px;
+  }
+  .hero-content { min-height: 750px; }
   .hero-copy {
     margin-top: 410px;
     padding: 28px 23px 30px;
@@ -2152,6 +2155,7 @@ h3 {
   .hero-actions { display: grid; }
   .button { width: 100%; }
   .section-heading { margin-bottom: 40px; }
+  .questgiver { padding-top: 58px; }
   .questgiver::before { display: none; }
   .questgiver-character { min-height: 480px; border-radius: 28px 8px 28px 28px; }
   .dialog-window { border-radius: 8px 28px 28px; }
