@@ -139,7 +139,7 @@ const shared = {
     },
     request: {
       kicker: "QUEST BRIEFING",
-      title: "Erzählt uns von eurem Abenteuer.",
+      title: "Was für ein Erlebnis sucht ihr?",
       intro: "Je mehr wir über eure Gruppe, eure Lieblingsspiele und euren Spielort wissen, desto besser können wir ein passendes Spiel entwickeln.",
       selectedTitle: "Auswahl des Questgebers",
       noSelection: "Noch keine Questgeber-Auswahl vorhanden. Das ist kein Problem – beschreibt uns einfach, worauf ihr Lust habt.",
@@ -305,7 +305,7 @@ const shared = {
     },
     request: {
       kicker: "QUEST BRIEFING",
-      title: "Tell us about your adventure.",
+      title: "What kind of experience are you looking for?",
       intro: "The more we know about your group, favourite games and location, the better we can shape a game around you.",
       selectedTitle: "Quest giver selection",
       noSelection: "There is no quest-giver selection yet. That’s fine – simply tell us what you would like to experience.",

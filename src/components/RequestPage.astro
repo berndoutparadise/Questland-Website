@@ -2,6 +2,8 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
+import { Picture } from "astro:assets";
+import heroImage from "../assets/images/v3/hero-keyart-v2.png";
 import { getContent } from "../data/content";
 import type { Locale } from "../data/quest";
 import { localePath, withBase } from "../utils/sitePaths";
@@ -42,12 +44,25 @@ const ages = ["5–7", "8–11", "12–15", "16+"];
 
     <main id="main" class="request-page">
       <section class="request-hero">
-        <div class="page request-hero__grid">
-          <div class="request-intro reveal">
-            <p class="kicker">{t.request.kicker}</p>
-            <h1>{t.request.title}</h1>
-            <p>{t.request.intro}</p>
-            <div class="request-route" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="page">
+          <div class="request-hero__stage">
+            <div class="request-hero__art" aria-hidden="true">
+              <Picture
+                src={heroImage}
+                formats={["avif", "webp"]}
+                widths={[760, 1080, 1440]}
+                sizes="(max-width: 760px) 100vw, 1200px"
+                alt=""
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <div class="request-intro reveal">
+              <p class="kicker">{t.request.kicker}</p>
+              <h1>{t.request.title}</h1>
+              <p>{t.request.intro}</p>
+              <div class="request-route" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
           </div>
           <aside class="finder-summary reveal" data-form-summary>
             <small>{t.request.selectedTitle}</small>
@@ -80,7 +95,8 @@ const ages = ["5–7", "8–11", "12–15", "16+"];
             </p>
 
             <fieldset>
-              <legend><span>01</span>{t.request.groups[0]}</legend>
+              <legend class="sr-only">{t.request.groups[0]}</legend>
+              <div class="quest-section-heading"><span>01</span><strong>{t.request.groups[0]}</strong></div>
               <div class="form-grid form-grid--two">
                 <label>
                   <span>{t.request.fields.name} <em>{t.request.required}</em></span>
@@ -98,7 +114,8 @@ const ages = ["5–7", "8–11", "12–15", "16+"];
             </fieldset>
 
             <fieldset>
-              <legend><span>02</span>{t.request.groups[1]}</legend>
+              <legend class="sr-only">{t.request.groups[1]}</legend>
+              <div class="quest-section-heading"><span>02</span><strong>{t.request.groups[1]}</strong></div>
               <div class="form-grid form-grid--two">
                 <label>
                   <span>{t.request.fields.audience} <em>{t.request.required}</em></span>
@@ -140,7 +157,8 @@ const ages = ["5–7", "8–11", "12–15", "16+"];
             </fieldset>
 
             <fieldset>
-              <legend><span>03</span>{t.request.groups[2]}</legend>
+              <legend class="sr-only">{t.request.groups[2]}</legend>
+              <div class="quest-section-heading"><span>03</span><strong>{t.request.groups[2]}</strong></div>
               <label>
                 <span>{t.request.fields.message} <em>{t.request.required}</em></span>
                 <textarea name="message" rows="7" placeholder={t.request.placeholders.message} required></textarea>
