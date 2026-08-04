@@ -829,21 +829,41 @@ h3 {
 }
 
 .dialog-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(110px, .8fr) minmax(150px, 1.2fr);
+  align-items: stretch;
+  gap: 13px;
   margin-top: 24px;
 }
 
 .text-button {
-  padding: 11px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 18px;
   cursor: pointer;
   color: var(--forest-700);
-  background: transparent;
+  background: var(--sage-light);
+  border: 1px solid rgba(47, 115, 87, .24);
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(47, 115, 87, .08);
   font-size: .69rem;
   font-weight: 850;
   letter-spacing: .1em;
   text-transform: uppercase;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.text-button:hover:not(:disabled) {
+  background: #e1ecd8;
+  border-color: rgba(47, 115, 87, .42);
+  box-shadow: 0 10px 22px rgba(47, 115, 87, .12);
+  transform: translateY(-2px);
+}
+
+.dialog-navigation .button {
+  width: auto;
 }
 
 .text-button:disabled,
@@ -2166,6 +2186,12 @@ h3 {
   .answer-chip { min-height: 86px; grid-template-columns: auto 1fr; align-items: center; gap: 15px; padding: 15px; }
   .answer-icon { margin: 0; }
   .answer-chip strong { align-self: center; }
+  .dialog-navigation {
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 12px;
+  }
+  .dialog-navigation .text-button,
+  .dialog-navigation .button { width: 100%; }
 
   .quest-entry { border-radius: 22px 22px 22px 7px; }
   .quest-entry__image { height: 225px; }
