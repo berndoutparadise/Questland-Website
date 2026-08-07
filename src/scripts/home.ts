@@ -41,6 +41,7 @@ let state = loadState();
 let openPlayType: PlayTypeId | null = null;
 
 const finder = root.querySelector<HTMLElement>("[data-finder]");
+const dialogWindow = root.querySelector<HTMLElement>(".dialog-window");
 const message = root.querySelector<HTMLElement>("[data-npc-message]");
 const intro = root.querySelector<HTMLElement>("[data-finder-intro]");
 const questions = root.querySelector<HTMLElement>("[data-finder-questions]");
@@ -136,8 +137,9 @@ function currentMessage() {
   return t.finder.questions[state.activeStep].text;
 }
 
-function renderFinder({ focus = false } = {}) {
+function renderFinder({ focus = false, scroll = false } = {}) {
   if (!message || !intro || !questions || !complete || !nextButton || !backButton) return;
+  if (finder) finder.dataset.dialogMode = state.dialogMode;
   message.classList.remove("is-changing");
   void message.offsetWidth;
   message.textContent = currentMessage();
@@ -159,7 +161,16 @@ function renderFinder({ focus = false } = {}) {
   saveState();
 
   if (focus && state.dialogMode === "question") {
-    finder?.querySelector<HTMLElement>(`[data-step="${state.activeStep}"] [data-answer]`)?.focus();
+    finder?.querySelector<HTMLElement>(`[data-step="${state.activeStep}"] [data-answer]`)?.focus({ preventScroll: true });
+  }
+
+  if (scroll && state.dialogMode === "question" && window.matchMedia("(max-width: 850px)").matches) {
+    window.requestAnimationFrame(() => {
+      dialogWindow?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
+    });
   }
 }
 
@@ -167,7 +178,7 @@ function startFinder() {
   state.dialogMode = "question";
   state.activeStep = 0;
   resetRecommendations();
-  renderFinder({ focus: true });
+  renderFinder({ focus: true, scroll: true });
 }
 
 function setAnswer(step: number, value: string) {
@@ -188,11 +199,11 @@ function continueFinder() {
   if (!questionAnswered(state.activeStep)) return;
   if (state.activeStep < 3) {
     state.activeStep += 1;
-    renderFinder({ focus: true });
+    renderFinder({ focus: true, scroll: true });
     return;
   }
   state.dialogMode = "complete";
-  renderFinder({ focus: true });
+  renderFinder({ focus: true, scroll: true });
 }
 
 function editStep(step: number) {
@@ -259,7 +270,7 @@ backButton?.addEventListener("click", () => {
     state.activeStep -= 1;
     state.dialogMode = "question";
     resetRecommendations();
-    renderFinder({ focus: true });
+    renderFinder({ focus: true, scroll: true });
   }
 });
 finder?.querySelector("[data-show-quests]")?.addEventListener("click", () => applyRecommendations());

@@ -2103,10 +2103,38 @@ h3 {
   }
   .scroll-cue { display: none; }
 
-  .questgiver-stage { grid-template-columns: 1fr; }
-  .questgiver-character { min-height: 520px; }
+  .questgiver-stage {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .questgiver-character {
+    min-height: clamp(360px, 72vw, 430px);
+    z-index: 1;
+  }
+  .questgiver-character img { object-position: 50% 15%; }
   .dialog-window::before { display: none; }
-  .dialog-body { min-height: 500px; }
+  .dialog-window {
+    z-index: 2;
+    margin: -118px 18px 0;
+    scroll-margin-top: 96px;
+  }
+  .dialog-body {
+    min-height: 0;
+    padding: 28px 30px 32px;
+  }
+  .questgiver-stage[data-dialog-mode="intro"] .dialog-window {
+    background: rgba(255, 254, 250, .84);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+  .questgiver-stage[data-dialog-mode="intro"] .npc-line {
+    margin-bottom: 24px;
+    font-size: clamp(2.15rem, 7vw, 3.5rem);
+  }
+  .questgiver-stage[data-dialog-mode="question"] .dialog-window,
+  .questgiver-stage[data-dialog-mode="complete"] .dialog-window {
+    background: var(--white);
+  }
 
   .section-heading--split,
   .why-heading,
@@ -2177,10 +2205,16 @@ h3 {
   .section-heading { margin-bottom: 40px; }
   .questgiver { padding-top: 58px; }
   .questgiver::before { display: none; }
-  .questgiver-character { min-height: 480px; border-radius: 28px 8px 28px 28px; }
+  .questgiver-character {
+    min-height: clamp(350px, 92vw, 410px);
+    border-radius: 28px 8px 28px 28px;
+  }
+  .questgiver-character img { object-position: 50% 13%; }
+  .dialog-window { margin: -108px 7px 0; }
+  .dialog-chrome { padding: 11px 15px; }
   .dialog-window { border-radius: 8px 28px 28px; }
-  .dialog-body { min-height: 440px; padding: 28px 20px; }
-  .npc-line { font-size: clamp(2.5rem, 13vw, 4rem); }
+  .dialog-body { min-height: 0; padding: 24px 18px 22px; }
+  .npc-line { margin-bottom: 22px; font-size: clamp(2.1rem, 10vw, 3.2rem); }
   .answer-grid,
   .answer-grid--four { grid-template-columns: 1fr; }
   .answer-chip { min-height: 86px; grid-template-columns: auto 1fr; align-items: center; gap: 15px; padding: 15px; }
