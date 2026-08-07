@@ -2108,9 +2108,11 @@ h3 {
     gap: 0;
   }
   .questgiver-character {
-    min-height: clamp(360px, 72vw, 430px);
+    height: clamp(360px, 72vw, 430px);
+    min-height: 0;
     z-index: 1;
   }
+  .questgiver-character picture { display: block; height: 100%; }
   .questgiver-character img { object-position: 50% 15%; }
   .dialog-window::before { display: none; }
   .dialog-window {
@@ -2206,7 +2208,8 @@ h3 {
   .questgiver { padding-top: 58px; }
   .questgiver::before { display: none; }
   .questgiver-character {
-    min-height: clamp(350px, 92vw, 410px);
+    height: clamp(350px, 92vw, 410px);
+    min-height: 0;
     border-radius: 28px 8px 28px 28px;
   }
   .questgiver-character img { object-position: 50% 13%; }
